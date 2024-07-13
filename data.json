@@ -1,0 +1,175 @@
+{
+    "data": [
+      {
+        "type": "Customer",
+        "id": 2,
+        "first_name": "Adam",
+        "last_name": "Jones",
+        "email": "ajones@example.com"
+      },
+      {
+        "type": "Customer",
+        "id": 5,
+        "first_name": "adam",
+        "last_name": null,
+        "email": "adam@example.com"
+      },
+      {
+        "type": "Customer",
+        "id": 8,
+        "first_name": "Brian",
+        "last_name": "Cho",
+        "email": "bcho@example.com"
+      },
+      {
+        "type": "Customer",
+        "id": 3,
+        "first_name": null,
+        "last_name": null,
+        "email": "@example.com"
+      },
+      {
+        "type": "Customer",
+        "id": 6,
+        "first_name": "David",
+        "last_name": "Parker",
+        "email": "davidparker.com"
+      },
+      {
+        "type": "Customer",
+        "id": 7,
+        "first_name": "Janet",
+        "last_name": "McDougal",
+        "email": "jmcdougal@example.com"
+      },
+      {
+        "type": "Customer",
+        "id": 10,
+        "first_name": " ",
+        "last_name": "Marian",
+        "email": "marian@example.com"
+      },
+      {
+        "type": "Customer",
+        "id": 1,
+        "first_name": "Dan",
+        "last_name": "Smith",
+        "email": "dsmith@example.com"
+      },
+      {
+        "type": "Customer",
+        "id": 9,
+        "first_name": "Anna",
+        "last_name": "Bernard",
+        "email": ""
+      },
+      {
+        "type": "Customer",
+        "id": 4,
+        "first_name": "Joanne",
+        "last_name": "SMITH",
+        "email": "jsmith@example.com"
+      },
+      {
+        "type": "Address",
+        "id": 103,
+        "customer_id": 2,
+        "billing_address": true,
+        "street": "455 Main St",
+        "city": "Franklin",
+        "state": "NH",
+        "postalcode": "03235"
+      },
+      {
+        "type": "Address",
+        "id": 106,
+        "customer_id": 5,
+        "billing_address": true,
+        "street": "13 West Ave",
+        "city": "Franklin",
+        "state": "",
+        "postalcode": "012345"
+      },
+      {
+        "type": "Address",
+        "id": 107,
+        "customer_id": 6,
+        "billing_address": true,
+        "street": "1655 Plum St",
+        "city": "Granite",
+        "state": "NH",
+        "postalcode": "03244"
+      },
+      {
+        "type": "Address",
+        "id": 104,
+        "customer_id": 3,
+        "billing_address": false,
+        "street": "",
+        "city": "Franklin",
+        "state": "NH",
+        "postalcode": "03235"
+      },
+      {
+        "type": "Address",
+        "id": 110,
+        "customer_id": 9,
+        "billing_address": true,
+        "street": "414 7th St",
+        "city": "Lynn",
+        "state": "MA",
+        "postalcode": "02778"
+      },
+      {
+        "type": "Address",
+        "id": 101,
+        "customer_id": 1,
+        "billing_address": false,
+        "street": "123 Main St",
+        "city": "Franklin",
+        "state": "NH",
+        "postalcode": "03235"
+      },
+      {
+        "type": "Address",
+        "id": 105,
+        "customer_id": 4,
+        "billing_address": true,
+        "street": "895 Adams Ave",
+        "city": null,
+        "state": "NH",
+        "postalcode": "03235"
+      },
+      {
+        "type": "Address",
+        "id": 108,
+        "customer_id": 7,
+        "billing_address": true,
+        "street": "698 1st St",
+        "city": "Boston",
+        "state": "MA",
+        "postalcode": "02914"
+      },
+      {
+        "type": "Address",
+        "id": 109,
+        "customer_id": 8,
+        "billing_address": true,
+        "street": "3114 Creek Lane",
+        "city": "Springfield",
+        "state": "MA",
+        "postalcode": " "
+      },
+      {
+        "type": "Address",
+        "id": 102,
+        "customer_id": 1,
+        "billing_address": true,
+        "street": "15 Apple Ave",
+        "city": "Franklin",
+        "state": "NH",
+        "postalcode": "03235"
+      }
+    ]
+  }
+  
