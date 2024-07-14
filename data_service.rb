@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # data_service.rb
 
 require_relative 'customer'

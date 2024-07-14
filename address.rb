@@ -56,6 +56,5 @@ class Address
       end
       result.sort_by(&:id)
     end
-    
   end
 end
