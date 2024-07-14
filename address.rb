@@ -2,14 +2,13 @@
 
 require 'json'
 require_relative 'customer'
-require_relative 'data_loader'
+require_relative 'data_service'
 
 class Address
   attr_accessor :customer
   attr_reader :id, :customer_id, :street, :city, :state, :postalcode, :billing_address
 
   @addresses = []
-  @customers = []
 
   def initialize(attributes = {})
     @id = attributes[:id]
@@ -24,14 +23,9 @@ class Address
 
   class << self
     def load_data
-      customers, addresses = DataLoader.load_data.partition { |record| record[:type] == 'Customer' }
-
-      @customers = customers.map { |record| Customer.new(record) }
-      @addresses = addresses.map { |record| Address.new(record) }
-
-      associate_customers_with_addresses
-
-      puts "Loaded #{@customers.size} customers and #{@addresses.size} addresses"
+      data = DataService.load_customers_and_addresses
+      @addresses = data[:addresses]
+      puts "Loaded #{@addresses.size} addresses"
     end
 
     def all
@@ -62,13 +56,6 @@ class Address
       end
       result.sort_by(&:id)
     end
-
-    private
-
-    def associate_customers_with_addresses
-      @addresses.each do |address|
-        address.customer = @customers.find { |cust| cust.id == address.customer_id }
-      end
-    end
+    
   end
 end

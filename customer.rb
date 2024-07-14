@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'data_loader'
+require_relative 'data_service'
 require_relative 'address'
 
 class Customer
@@ -8,7 +8,6 @@ class Customer
   attr_writer :addresses
 
   @customers = []
-  @addresses = []
 
   def initialize(attributes)
     @id = attributes[:id]
@@ -28,14 +27,9 @@ class Customer
 
   class << self
     def load_data
-      customers, addresses = DataLoader.load_data.partition { |record| record[:type] == 'Customer' }
-
-      @customers = customers.map { |record| Customer.new(record) }
-      @addresses = addresses.map { |record| Address.new(record) }
-
-      associate_addresses_with_customers
-
-      puts "Loaded #{@customers.size} customers and #{@addresses.size} addresses"
+      data = DataService.load_customers_and_addresses
+      @customers = data[:customers]
+      puts "Loaded #{@customers.size} customers"
     end
 
     def all
@@ -65,14 +59,6 @@ class Customer
         result = result.select { |customer| customer.send(key)&.casecmp?(value.to_s) }
       end
       result.sort_by(&:id)
-    end
-
-    private
-
-    def associate_addresses_with_customers
-      @customers.each do |customer|
-        customer.addresses = @addresses.select { |address| address.customer_id == customer.id }
-      end
     end
   end
 end

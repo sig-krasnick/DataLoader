@@ -1,32 +1,35 @@
-# frozen_string_literal: true
+# data_service.rb
+
+require_relative 'customer'
+require_relative 'address'
+require_relative 'data_loader'
 
 class DataService
-  def initialize(data)
-    @data = data
-    @customers = []
-    @addresses = []
-    parse_data
-  end
+  class << self
+    def load_customers_and_addresses
+      customers, addresses = DataLoader.load_data.partition { |record| record[:type] == 'Customer' }
 
-  def parse_data
-    @data.each do |record|
-      if record[:type] == 'Customer'
-        customer = Customer.new(record)
-        @customers << customer
-      elsif record[:type] == 'Address'
-        address = Address.new(record)
-        customer = @customers.find { |cust| cust.id == address.customer_id }
-        customer.addresses << address if customer
-        @addresses << address
+      customers = customers.map { |record| Customer.new(record) }
+      addresses = addresses.map { |record| Address.new(record) }
+
+      associate_addresses_with_customers(customers, addresses)
+      associate_customers_with_addresses(customers, addresses)
+
+      { customers: customers, addresses: addresses }
+    end
+
+    private
+
+    def associate_addresses_with_customers(customers, addresses)
+      customers.each do |customer|
+        customer.addresses = addresses.select { |address| address.customer_id == customer.id }
       end
     end
-  end
 
-  def find_customer_by_id(id)
-    @customers.find { |customer| customer.id == id }
-  end
-
-  def find_address_by_id(id)
-    @addresses.find { |address| address.id == id }
+    def associate_customers_with_addresses(customers, addresses)
+      addresses.each do |address|
+        address.customer = customers.select { |cust| cust.id == address.customer_id }.first
+      end
+    end
   end
 end
