@@ -1,20 +1,24 @@
 # frozen_string_literal: true
 
+requre 'active_model'
 require_relative 'data_service'
 require_relative 'address'
 
 class Customer
-  attr_accessor :id, :first_name, :last_name, :email
-  attr_writer :addresses
+  include ActiveModel::Model
+  include ActiveModel::Attributes
+
+  attribute :id, :integer
+  attribute :first_name, :string
+  attribute :last_name, :string
+  attribute :email, :string
+  attr_accessor :addresses
 
   @customers = []
 
-  def initialize(attributes)
-    @id = attributes[:id]
-    @first_name = attributes[:first_name]
-    @last_name = attributes[:last_name]
-    @email = attributes[:email]
-    @addresses = []
+  def initialize(attributes = {})
+    super
+    @addresses ||= []
   end
 
   def addresses

@@ -1,23 +1,27 @@
 # frozen_string_literal: true
 
 require 'json'
+require 'active_model'
 require_relative 'customer'
 require_relative 'data_service'
 
 class Address
+  include ActiveModel::Model
+  include ActiveModel::Attributes
+
+  attribute :id, :integer
+  attribute :customer_id, :integer
+  attribute :street, :string
+  attribute :city, :string
+  attribute :state, :string
+  attribute :postalcode, :string
+  attribute :billing_address, :boolean
   attr_accessor :customer
-  attr_reader :id, :customer_id, :street, :city, :state, :postalcode, :billing_address
 
   @addresses = []
 
   def initialize(attributes = {})
-    @id = attributes[:id]
-    @customer_id = attributes[:customer_id]
-    @billing_address = attributes[:billing_address]
-    @street = attributes[:street]
-    @city = attributes[:city]
-    @state = attributes[:state]
-    @postalcode = attributes[:postalcode]
+    super
     @customer = nil
   end
 
@@ -25,7 +29,6 @@ class Address
     def load_data
       data = DataService.load_customers_and_addresses
       @addresses = data[:addresses]
-      puts "Loaded #{@addresses.size} addresses"
     end
 
     def all
