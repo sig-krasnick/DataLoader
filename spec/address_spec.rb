@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require_relative '../address'
 require 'debug'
 
 describe 'Address' do
   before(:all) do
-    Address.load_data  # Ensure data is loaded before tests
+    Address.load_data # Ensure data is loaded before tests
   end
 
   describe '.all' do
@@ -28,7 +30,7 @@ describe 'Address' do
     end
 
     it 'returns nil when there is no address with the id passed' do
-      address = Address.find(123123)
+      address = Address.find(123_123)
       expect(address).to be_nil
     end
   end
@@ -88,7 +90,6 @@ describe 'Address' do
 
   describe 'ordering results' do
     it 'allows chaining an order method to change the result order of the .all method' do
-      debugger
       addresses = Address.all.order(:id, :desc)
       expect(addresses.size).to eq(10)
       expect(addresses.map(&:id)).to eq([110, 109, 108, 107, 106, 105, 104, 103, 102, 101])
@@ -96,17 +97,17 @@ describe 'Address' do
       addresses = Address.all.order(:street)
       expect(addresses.size).to eq(10)
       expect(addresses.map(&:street)).to eq([
-        '123 Main St',
-        '13 West Ave',
-        '15 Apple Ave',
-        '1655 Plum St',
-        '3114 Creek Lane',
-        '414 7th St',
-        '455 Main St',
-        '698 1st St',
-        '895 Adams Ave',
-        ''
-      ])
+                                              '123 Main St',
+                                              '13 West Ave',
+                                              '15 Apple Ave',
+                                              '1655 Plum St',
+                                              '3114 Creek Lane',
+                                              '414 7th St',
+                                              '455 Main St',
+                                              '698 1st St',
+                                              '895 Adams Ave',
+                                              ''
+                                            ])
     end
 
     it 'allows chaining an order method to change the result order of the .where method' do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DataService
   def initialize(data)
     @data = data
@@ -9,8 +11,8 @@ class DataService
   def parse_data
     @data.each do |record|
       if record[:type] == 'Customer'
-        varOcg = Customer.new(record) # __define-ocg__
-        @customers << varOcg
+        customer = Customer.new(record)
+        @customers << customer
       elsif record[:type] == 'Address'
         address = Address.new(record)
         customer = @customers.find { |cust| cust.id == address.customer_id }

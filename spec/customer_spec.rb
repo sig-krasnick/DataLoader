@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../customer'
 require 'debug'
 
@@ -7,7 +9,6 @@ describe 'Customer' do
     # Load data only once
     @data_loaded ||= begin
       Customer.load_data
-      # binding.break # Add a breakpoint for debugging
       true
     end
   end
@@ -34,7 +35,7 @@ describe 'Customer' do
     end
 
     it 'returns nil when there is no customer with the id passed' do
-      customer = Customer.find(123123)
+      customer = Customer.find(123_123)
       expect(customer).to be_nil
     end
   end
@@ -126,19 +127,20 @@ describe 'Customer' do
 
       customers = Customer.all.order(:first_name)
       expect(customers.size).to eq(10)
+
       customer_first_names = customers.map(&:first_name)
       expect(customer_first_names).to eq([
-        'Adam',
-        'adam',
-        'Anna',
-        'Brian',
-        'Dan',
-        'David',
-        'Janet',
-        'Joanne',
-        ' ',
-        nil
-      ])
+                                           'Adam',
+                                           'adam',
+                                           'Anna',
+                                           'Brian',
+                                           'Dan',
+                                           'David',
+                                           'Janet',
+                                           'Joanne',
+                                           ' ',
+                                           nil
+                                         ])
     end
 
     it 'allows chaining an order method to change the result order of the .where method' do
