@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-requre 'active_model'
+require 'active_model'
 require_relative 'data_service'
 require_relative 'address'
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # data_service.rb
 
 require_relative 'customer'
@@ -7,10 +9,11 @@ require_relative 'data_loader'
 class DataService
   class << self
     def load_customers_and_addresses
-      customers, addresses = DataLoader.load_data.partition { |record| record[:type] == 'Customer' }
+      data = DataLoader.load_data
+      customers_data, addresses_data = data.partition { |record| record[:type] == 'Customer' }
 
-      customers = customers.map { |record| Customer.new(record) }
-      addresses = addresses.map { |record| Address.new(record) }
+      customers = customers_data.map { |record| Customer.new(record.except(:type)) }
+      addresses = addresses_data.map { |record| Address.new(record.except(:type)) }
 
       associate_addresses_with_customers(customers, addresses)
       associate_customers_with_addresses(customers, addresses)
